@@ -7,6 +7,10 @@
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' 
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   %body
+    %nav{class: 'navbar navbar-expand-lg navbar-dark bg-dark p-2'}
+      = link_to 'Teachers Test App', root_path, class: 'navbar-brand mb-0 h1'
+      
     = yield
