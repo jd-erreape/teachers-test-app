@@ -1,0 +1,37 @@
+name: Spec
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      DB_DATABASE: teachers_test_app_test
+      DB_USER: root
+      DB_PASSWORD: root
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up MySQL
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          # Not needed with a .ruby-version file
+          ruby-version: 3.0.2
+          # runs 'bundle install' and caches installed gems automatically
+          bundler-cache: true
+
+      - name: Run rspec tests
+        run: |
+          bundle exec rake db:test:prepare
+          bundle exec rspec
