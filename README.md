@@ -1,24 +1,19 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Requirements / Versions
 
-Things you may want to cover:
+- Ruby: 3.0.2
+- Rails: 6.1.4
+- DB: MySQL, tested with 8.0.26
 
-* Ruby version
+## Install process
 
-* System dependencies
+Make sure you have correct ruby and MySQL installed
 
-* Configuration
+- Install the gems with `bundle install`
+- The DB creadentials are defaulted to `root` / `root` however `DEV_DATABASE_USERNAME` and `DEV_DATABASE_PASSWORD` env vars can be set in order to change this defaults
+- Create dev DB with `bundle exec rake db:create`
+- Run migrations with `bundle exec rake db:migrate`
+- Run the server with `bundle exec rails s -p 3000`
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+App should be accessible from [http://localhost:3000](http://localhost:3000)
