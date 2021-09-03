@@ -1,0 +1,16 @@
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/**/*'
+    - 'config.ru'
+    - 'Rakefile'
+    - 'vendor/**/*'
+
+Style/Documentation:
+  Enabled: false
+
+require:
+  - rubocop-rails
+  - rubocop-rspec
