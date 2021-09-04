@@ -1,0 +1,47 @@
+%div.container
+  %div{ class: 'row justify-content-md-center' }
+    %div{class: 'col-md'}
+      %h1
+        Courses
+
+  - if current_teacher
+    %div{ class: 'row justify-content-md-center mb-2' }
+      %div{class: 'col-md'} 
+        = link_to 'Create Course', new_course_path, class: 'btn btn-primary'
+
+  %div{ class: 'row justify-content-md-center' }
+    %div{class: 'col-md'}
+      %table{ class: 'table' }
+        %thead{ class: 'table-dark' }
+          %tr
+            %th
+              Title
+            %th
+              Votes
+            %th
+              Registered
+            %th
+              Actions
+        %tbody
+          - if @courses.empty?
+            %tr
+              %td{ colspan: 3 }
+                There are no Courses at the moment
+          - else
+            - @courses.each do |course|
+              %tr
+                %td
+                  = course.title
+                %td
+                  0
+                %td
+                  = course.imparted_by?(current_teacher)
+                %td
+                  = link_to 'Details', course_path(course.id), class: 'btn btn-primary'
+                  %button{ class: 'btn btn-primary' }
+                    Vote
+                  %button{ class: 'btn btn-success' }
+                    Register
+                  %button{ class: 'btn btn-danger' }
+                    Unregister
+      
