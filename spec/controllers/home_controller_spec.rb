@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require_relative './shared/examples/render_200_html_template'
 
 RSpec.describe HomeController, type: :controller do
   describe '#index' do
@@ -10,12 +11,8 @@ RSpec.describe HomeController, type: :controller do
 
     before { do_index }
 
-    it 'returns a 200 status code' do
-      expect(response.status).to eq(200)
-    end
-
-    it 'returns text/html content' do
-      expect(response.content_type).to eq('text/html; charset=utf-8')
+    include_examples 'render 200 html template' do
+      let(:template) { 'index' }
     end
   end
 end
