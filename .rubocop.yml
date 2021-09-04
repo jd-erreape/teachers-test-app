@@ -11,6 +11,36 @@ AllCops:
 Style/Documentation:
   Enabled: false
 
+# We are disabling this rule because whenever we have a spec
+# for something like a controller, it will be necessarily long
+# as we will be including specs for all the actions
+Metrics/BlockLength:
+  Enabled: false
+
+# Increasing a bit the allowed nesting for RSpec groups
+# in order to facilitate a better grouping of specs using contexts
+RSpec/NestedGroups:
+  Max: 4
+
+# This limits the amount of lets that can be added within
+# a spec, because of the style of testing we are following we usually
+# use a let for every constant or value we use in the specs so
+# this rule is incompatible with that style 
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+# To DRY controller specs, we are often adding the execution of
+# the request within a before block, because of this, sometimes
+# we need to set expectations within that same before block so
+# this rule needs to be disabled to be able to implement that pattern
+RSpec/ExpectInHook:
+  Enabled: false
+
+# This is just a preference in the way of implementing stubs
+# and expectations using receive over have_received and spies
+RSpec/MessageSpies:
+  Enabled: false
+
 require:
   - rubocop-rails
   - rubocop-rspec

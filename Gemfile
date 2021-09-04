@@ -36,7 +36,10 @@ gem 'haml-rails', '~> 2.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'rspec-rails', '~> 5.0.0'
+  # We add factory bot and faker as a development dependenies as well because sometimes
+  # is convenient to be able to build / create records using rails console
+  gem 'factory_bot', '~> 6.2.0'
+  gem 'faker', '~> 2.18.0'
 end
 
 group :development do
@@ -48,13 +51,18 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  # Spec library
+  gem 'rspec-rails', '~> 5.0.0'
   # Check against ruby style guides
   gem 'rubocop', '~> 1.19.1', require: false
   gem 'rubocop-rails', '~> 2.11.3', require: false
   gem 'rubocop-rspec', '~> 2.4.0', require: false
+  # Debugging utilities
+  gem 'pry-rails', '~> 0.3.9'
 end
 
 group :test do
+  gem 'rails-controller-testing', '~> 1.0.5'
   gem 'shoulda-matchers', '~> 5.0'
 end
 
