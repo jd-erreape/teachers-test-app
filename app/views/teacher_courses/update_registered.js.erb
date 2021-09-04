@@ -1,0 +1,4 @@
+$('.flash-container').html("<%= escape_javascript(render 'shared/flash/elements') %>");
+$('#course-<%= @course.id %> .register-status').html("<%= escape_javascript(render partial: 'courses/index/register_status', locals: { course: @course }) %>");
+$('#course-<%= @course.id %>-registered').text("<%= @course.imparted_by?(current_teacher) %>")
+  

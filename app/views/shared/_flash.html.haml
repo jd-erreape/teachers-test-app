@@ -1,6 +1,0 @@
-%div.container
-  %div.row
-    %div.col
-      - flash.each do |flash_level, flash_message|
-        %div{ class: "alert alert-#{flash_class(flash_level)}" }
-          = flash_message
