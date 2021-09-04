@@ -21,4 +21,10 @@ class ApplicationController < ActionController::Base
   def require_not_current_teacher
     redirect_to root_path, alert: NOT_AUTHORIZED_MESSAGE if current_teacher
   end
+
+  def set_no_cache_headers
+    response.headers['Cache-Control'] = 'no-cache, no-store'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = 'Mon, 01 Jan 1990 00:00:00 GMT'
+  end
 end

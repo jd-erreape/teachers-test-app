@@ -5,6 +5,7 @@ class CoursesController < ApplicationController
   COURSE_DOESNT_EXIST_MESSAGE = 'The Course requested does not exist'
 
   before_action :require_current_teacher, only: %i[new create]
+  before_action :set_no_cache_headers
 
   def index
     # The includes here is necessary to avoid n + 1
