@@ -51,7 +51,8 @@
       var courseRow = $(event.target.closest('.course-row'));
       
       return parseInt(courseRow.attr('id').split('-')[1]);
-    }
+    };
+
     $(document).on('click', '.register-button', function(event) {
       $.post("#{teacher_courses_path}", { id: courseId(event) });
     });
