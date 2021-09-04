@@ -5,4 +5,5 @@ Rails.application.routes.draw do
 
   resource :session, only: %i[new create destroy], controller: :session
   resources :teachers, only: %i[new create]
+  resources :courses, only: %i[index show new create]
 end

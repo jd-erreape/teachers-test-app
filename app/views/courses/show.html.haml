@@ -1,0 +1,32 @@
+%div.container
+  %div{ class: 'row justify-content-md-center' }
+    %div{class: 'col-md'}
+      %h1
+        = "Course: #{@course.title}"
+  
+  %div{ class: 'row justify-content-md-center' }
+    %div{class: 'col-md'}
+      %h4
+        Teachers
+
+  %div{ class: 'row justify-content-md-center' }
+    %div{class: 'col-md'}
+      %table{ class: 'table' }
+        %thead{ class: 'table-dark' }
+          %tr
+            %th
+              Email
+            %th
+              Votes
+        %tbody
+          - if @course.teachers.empty?
+            %tr
+              %td{ colspan: 2 }
+                There are no Teachers registered to this Course
+          - else
+            - @course.teachers.each do |teacher|
+              %tr
+                %td
+                  = teacher.email
+                %td
+                  0

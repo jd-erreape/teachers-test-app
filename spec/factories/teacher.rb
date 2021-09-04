@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :teacher do
-    email { Faker::Internet.email }
+    email { Faker::Internet.unique.email }
     password { Faker::Internet.password }
     password_confirmation { password }
   end
