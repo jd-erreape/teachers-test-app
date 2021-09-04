@@ -29,19 +29,38 @@
                 There are no Courses at the moment
           - else
             - @courses.each do |course|
-              %tr
+              %tr{ id: "course-#{course.id}", class: 'course-row' }
                 %td
                   = course.title
                 %td
                   0
-                %td
+                %td{ id: "course-#{course.id}-registered"}
                   = course.imparted_by?(current_teacher)
                 %td
-                  = link_to 'Details', course_path(course.id), class: 'btn btn-primary'
-                  %button{ class: 'btn btn-primary' }
-                    Vote
-                  %button{ class: 'btn btn-success' }
-                    Register
-                  %button{ class: 'btn btn-danger' }
-                    Unregister
+                  %span.details
+                    = link_to 'Details', course_path(course.id), class: 'btn btn-primary'
+                  %span.vote-status
+                    = render partial: 'courses/index/vote_status', locals: { course: course }
+                  %span.register-status
+                    = render partial: 'courses/index/register_status', locals: { course: course }
+                  
       
+:javascript
+  $(document).ready(function () {
+    var courseId = function (event) {
+      var courseRow = $(event.target.closest('.course-row'));
+      
+      return parseInt(courseRow.attr('id').split('-')[1]);
+    }
+    $(document).on('click', '.register-button', function(event) {
+      $.post("#{teacher_courses_path}", { id: courseId(event) });
+    });
+
+    $(document).on('click', '.unregister-button', function(event) {
+      $.ajax({
+        url: '/teacher_courses/' + courseId(event),
+        method: 'DELETE',
+      });
+    });
+  });
+  

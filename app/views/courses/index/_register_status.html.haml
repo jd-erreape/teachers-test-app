@@ -1,0 +1,6 @@
+- if course.imparted_by?(current_teacher)
+  %button{ class: 'unregister-button btn btn-danger' }
+    Unregister
+- else
+  %button{ class: "register-button btn btn-success #{disable_status(current_teacher)}" }
+    Register
