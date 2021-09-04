@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 VALID_EMAILS = [
   'valid@example.com',
   'Valid@test.example.com',
@@ -26,8 +28,8 @@ VALID_EMAILS = [
   "test'test@example.com",
   'test@xn--bcher-kva.ch',
   'test@example.xn--0zwm56d',
-  'test@192.192.192.1',
-]
+  'test@192.192.192.1'
+].freeze
 
 INVALID_EMAILS = [
   'no_at_symbol',
@@ -40,13 +42,13 @@ INVALID_EMAILS = [
   'invalid-example.com',
   'invalid@example.b#r.com',
   'invali d@example.com',
-  "\"a-17180061943-10618354-1993365053@example.com",
+  '"a-17180061943-10618354-1993365053@example.com',
   'invalidexample.com',
   'local@sub.)domain.com',
   'local@sub.#domain.com',
   "foo@example.com\nexample@gmail.com",
   'invalid@example.',
-  "\"foo\\\\\"\"@bar.com",
+  '"foo\\\\""@bar.com',
   "foo@mail.com\r\nfoo@mail.com",
   '@example.com',
   'foo@',
@@ -55,5 +57,5 @@ INVALID_EMAILS = [
   'Fred\ Bloggs_@example.com',
   'Abc\@def+@example.com',
   'Joe.\\Blow@example.com',
-  %!"example\\\\""example.com!
-]
+  %("example\\\\""example.com)
+].freeze
