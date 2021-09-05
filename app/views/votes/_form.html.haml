@@ -1,0 +1,16 @@
+- if current_teacher
+  - already_voted = current_teacher.voted_for?(@vote.voted)
+  
+  - form_method = votes_form_method(already_voted)
+  - button_message = votes_button_message(already_voted)
+  - button_class = votes_button_class(already_voted)
+
+  = form_for(@vote, method: form_method) do |form|
+    = form.hidden_field :voted_type, value: @vote.voted.class.name
+    = form.hidden_field :voted_id, value: @vote.voted.id
+
+    = form.submit button_message, { class: "btn btn-#{button_class} mt-2" }
+
+
+       
+        

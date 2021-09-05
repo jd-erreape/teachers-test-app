@@ -30,3 +30,7 @@
                   = teacher.email
                 %td
                   0
+                  
+  %div{ class: 'row justify-content-md-center' }
+    %div{class: 'col-md'}
+      = render partial: 'votes/form', locals: { vote: @vote }

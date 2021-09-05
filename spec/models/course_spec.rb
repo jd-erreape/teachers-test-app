@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require_relative './shared/examples/receives_votes'
 
 RSpec.describe Course, type: :model do
   it { is_expected.to validate_presence_of(:title) }
   it { is_expected.to validate_uniqueness_of(:title).case_insensitive }
   it { is_expected.to have_many(:teacher_courses).dependent(:destroy) }
   it { is_expected.to have_many(:teachers).through(:teacher_courses) }
+
+  include_examples 'receives votes'
 
   describe '#imparted_by?' do
     subject { course.imparted_by?(given_teacher) }

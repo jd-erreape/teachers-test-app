@@ -33,14 +33,12 @@
                 %td
                   = course.title
                 %td
-                  0
+                  = course.votes_received.length
                 %td{ id: "course-#{course.id}-registered"}
                   = course.imparted_by?(current_teacher)
                 %td
                   %span.details
                     = link_to 'Details', course_path(course.id), class: 'btn btn-primary'
-                  %span.vote-status
-                    = render partial: 'courses/index/vote_status', locals: { course: course }
                   %span.register-status
                     = render partial: 'courses/index/register_status', locals: { course: course }
                   

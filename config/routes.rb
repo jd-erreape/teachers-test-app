@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   resources :teachers, only: %i[new create]
   resources :courses, only: %i[index show new create]
   resources :teacher_courses, only: %i[create destroy]
+  resources :votes, only: %i[create destroy]
 end

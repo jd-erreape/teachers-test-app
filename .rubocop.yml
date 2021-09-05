@@ -20,7 +20,7 @@ Metrics/BlockLength:
 # Increasing a bit the allowed nesting for RSpec groups
 # in order to facilitate a better grouping of specs using contexts
 RSpec/NestedGroups:
-  Max: 4
+  Max: 5
 
 # This limits the amount of lets that can be added within
 # a spec, because of the style of testing we are following we usually

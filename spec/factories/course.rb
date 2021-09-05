@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :course do
-    title { Faker::Beer.unique.name }
+    title { Faker::Lorem.unique.sentence }
   end
 end
