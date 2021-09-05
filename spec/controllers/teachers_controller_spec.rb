@@ -4,8 +4,14 @@ require 'rails_helper'
 require_relative './shared/contexts/current_teacher'
 require_relative './shared/examples/render_200_html_template'
 require_relative './shared/examples/not_authorized'
+require_relative './shared/examples/index_with_resources'
+require_relative './shared/examples/show_with_resource'
 
 RSpec.describe TeachersController, type: :controller do
+  describe '#index' do
+    include_examples 'index with resources', :teacher
+  end
+
   describe '#new' do
     def do_new
       get :new
@@ -34,6 +40,10 @@ RSpec.describe TeachersController, type: :controller do
         expect(assigns['teacher']).not_to be_persisted
       end
     end
+  end
+
+  describe '#show' do
+    include_examples 'show with resource', :teacher
   end
 
   describe '#create' do

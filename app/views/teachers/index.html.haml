@@ -1,0 +1,29 @@
+%div.container
+  = render partial: 'shared/page_title', locals: { title: 'Teachers' }
+
+  %div{ class: 'row justify-content-md-center' }
+    %div{class: 'col-md'}
+      %table{ class: 'table' }
+        %thead{ class: 'table-dark' }
+          %tr
+            %th
+              Email
+            %th
+              Votes
+            %th
+              Actions
+        %tbody
+          - if @teachers.empty?
+            %tr
+              %td{ colspan: 3 }
+                There are no Teachers at the moment
+          - else
+            - @teachers.each do |teacher|
+              %tr{ class: 'course-row' }
+                %td
+                  = teacher.email
+                %td
+                  = teacher.votes_received.length
+                %td
+                  %span.details
+                    = link_to 'Details', teacher_path(teacher.id), class: 'btn btn-primary'

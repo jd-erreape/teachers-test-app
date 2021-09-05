@@ -2,7 +2,7 @@
 
 class CoursesController < ApplicationController
   CREATE_SUCCESS_MESSAGE = 'Course has been created and you have been registered on it'
-  COURSE_DOESNT_EXIST_MESSAGE = 'The Course requested does not exist'
+  RESOURCE_DOESNT_EXIST_MESSAGE = 'The Course requested does not exist'
 
   before_action :require_current_teacher, only: %i[new create]
   before_action :set_no_cache_headers
@@ -18,7 +18,7 @@ class CoursesController < ApplicationController
     @course = Course.includes(:teachers, :votes_received).find(params[:id])
     @vote = Votes::Builder.new(voter: current_teacher, voted: @course).run
   rescue ActiveRecord::RecordNotFound
-    redirect_to courses_path, alert: COURSE_DOESNT_EXIST_MESSAGE
+    redirect_to courses_path, alert: RESOURCE_DOESNT_EXIST_MESSAGE
   end
 
   def new

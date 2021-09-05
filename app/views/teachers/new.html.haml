@@ -7,7 +7,7 @@
   %div{ class: 'row justify-content-md-center' }
     %div{class: 'col-md-5'}
       = form_for(@teacher) do |form|
-        = render partial: 'common/forms/errors', locals: { record: @teacher }
+        = render partial: 'shared/forms/errors', locals: { record: @teacher }
 
         %div{class: 'form-group'}
           = form.label :email

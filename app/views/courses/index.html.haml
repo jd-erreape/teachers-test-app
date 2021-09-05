@@ -1,8 +1,5 @@
 %div.container
-  %div{ class: 'row justify-content-md-center' }
-    %div{class: 'col-md'}
-      %h1
-        Courses
+  = render partial: 'shared/page_title', locals: { title: 'Courses' }
 
   - if current_teacher
     %div{ class: 'row justify-content-md-center mb-2' }
@@ -25,7 +22,7 @@
         %tbody
           - if @courses.empty?
             %tr
-              %td{ colspan: 3 }
+              %td{ colspan: 4 }
                 There are no Courses at the moment
           - else
             - @courses.each do |course|

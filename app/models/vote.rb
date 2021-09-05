@@ -10,6 +10,6 @@ class Vote < ApplicationRecord
   # We need to validate the scoped uniqueness this way for polymorphic
   # associations as stated in the following Github thread
   # https://github.com/rails/rails/issues/34312#issuecomment-586870322
-  validates :voted_id, uniqueness: { scope: %i[voted_type voter_id] }
-  validates :voter_id, uniqueness: { scope: %i[voter_type voted_id] }
+  validates :voted_id, uniqueness: { scope: %i[voted_type voter_type voter_id] }
+  validates :voter_id, uniqueness: { scope: %i[voter_type voted_type voted_id] }
 end
