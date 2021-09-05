@@ -22,11 +22,9 @@ class TeachersController < ApplicationController
   end
 
   def create
-    @teacher = Teacher.new(teacher_params)
+    @teacher = teacher_creation_service.run
 
-    if @teacher.save
-      Auth::Create.new(context: self, teacher_id: @teacher.id).run
-
+    if @teacher.valid?
       redirect_to root_url, notice: CREATE_SUCCESS_MESSAGE
     else
       render 'new'
@@ -37,5 +35,12 @@ class TeachersController < ApplicationController
 
   def teacher_params
     params.require(:teacher).permit(:email, :password, :password_confirmation)
+  end
+
+  def teacher_creation_service
+    Teachers::Creation.new(
+      context: self,
+      teacher_params: teacher_params
+    )
   end
 end
