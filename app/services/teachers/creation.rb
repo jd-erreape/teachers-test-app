@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# Service in charge of creating a Teacher given its params
+# and delegating to the Auth Creation service the log in
+# process for this teacher if the creation succeed
 module Teachers
   class Creation
     def initialize(context:, teacher_params:)
@@ -7,6 +10,11 @@ module Teachers
       @teacher_params = teacher_params
     end
 
+    # It creates the teacher and delegates within the
+    # Auth Creation service, if the teacher is not valid
+    # we still return the teacher (without performing)
+    # the authentication so whatever client using the
+    # service could know why the process didnt succeed
     def run
       return teacher unless teacher.save
 
