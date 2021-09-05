@@ -44,9 +44,8 @@ ActiveRecord::Schema.define(version: 2021_09_05_085224) do
     t.bigint "voter_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["voted_id", "voted_type", "voter_id"], name: "index_votes_on_voted_id_and_voted_type_and_voter_id", unique: true
     t.index ["voted_type", "voted_id"], name: "index_votes_on_voted"
-    t.index ["voter_id", "voter_type", "voted_id"], name: "index_votes_on_voter_id_and_voter_type_and_voted_id", unique: true
+    t.index ["voter_id", "voter_type", "voted_id", "voted_type"], name: "uniq_votes_index", unique: true
     t.index ["voter_type", "voter_id"], name: "index_votes_on_voter"
   end
 

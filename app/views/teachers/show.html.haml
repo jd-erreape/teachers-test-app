@@ -1,10 +1,10 @@
 %div.container
-  = render partial: 'shared/page_title', locals: { title: "Course: #{@course.title}" }
-  
+  = render partial: 'shared/page_title', locals: { title: "Teacher: #{@teacher.email}" }
+
   %div{ class: 'row justify-content-md-center' }
     %div{class: 'col-md'}
       %h4
-        Teachers
+        Courses
 
   %div{ class: 'row justify-content-md-center' }
     %div{class: 'col-md'}
@@ -12,18 +12,18 @@
         %thead{ class: 'table-dark' }
           %tr
             %th
-              Email
+              title
         %tbody
-          - if @course.teachers.empty?
+          - if @teacher.courses.empty?
             %tr
               %td
-                There are no Teachers registered to this Course
+                This Teacher did not register into any Course
           - else
-            - @course.teachers.each do |teacher|
+            - @teacher.courses.each do |course|
               %tr
                 %td
-                  = teacher.email
-                  
+                  = course.title
+
   %div{ class: 'row justify-content-md-center' }
     %div{class: 'col-md'}
-      = render partial: 'votes/form', locals: { vote: @vote }
+      = render partial: 'votes/form', locals: { vote: @vote }  

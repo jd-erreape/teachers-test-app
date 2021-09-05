@@ -4,24 +4,12 @@ require 'rails_helper'
 require_relative './shared/contexts/current_teacher'
 require_relative './shared/examples/render_200_html_template'
 require_relative './shared/examples/not_authorized'
+require_relative './shared/examples/index_with_resources'
+require_relative './shared/examples/show_with_resource'
 
 RSpec.describe CoursesController, type: :controller do
   describe '#index' do
-    let!(:courses) { 3.times.map { create(:course) } }
-
-    def do_index
-      get :index
-    end
-
-    before { do_index }
-
-    include_examples 'render 200 html template' do
-      let(:template) { 'index' }
-    end
-
-    it 'assigns the current courses' do
-      expect(assigns['courses']).to eq(courses)
-    end
+    include_examples 'index with resources', :course
   end
 
   describe '#new' do
@@ -55,35 +43,7 @@ RSpec.describe CoursesController, type: :controller do
   end
 
   describe '#show' do
-    let(:course) { create(:course) }
-
-    def do_show(course_id)
-      get :show, params: { id: course_id }
-    end
-
-    context 'when the course requested exist' do
-      before { do_show(course.id) }
-
-      include_examples 'render 200 html template' do
-        let(:template) { 'show' }
-      end
-
-      it 'assigns the course' do
-        expect(assigns['course']).to eq(course)
-      end
-    end
-
-    context 'when the course requested does not exist' do
-      before { do_show(-1) }
-
-      it 'redirects to courses_path' do
-        expect(response).to redirect_to(courses_path)
-      end
-
-      it 'sets proper flash message' do
-        expect(response.request.flash[:alert]).to eq(CoursesController::COURSE_DOESNT_EXIST_MESSAGE)
-      end
-    end
+    include_examples 'show with resource', :course
   end
 
   describe '#create' do
