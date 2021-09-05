@@ -12,9 +12,9 @@ class VotesController < ApplicationController
     @vote = Vote.new(vote_params.merge(voter: current_teacher))
 
     if @vote.save
-      redirect_back fallback_location: root_path, notice: CREATE_SUCCESS_MESSAGE
+      redirect_back_with(:notice, CREATE_SUCCESS_MESSAGE)
     else
-      redirect_back fallback_location: root_path, alert: CREATE_ERROR_MESSAGE
+      redirect_back_with(:alert, CREATE_ERROR_MESSAGE)
     end
   end
 
@@ -22,9 +22,9 @@ class VotesController < ApplicationController
     @vote = current_teacher.votes_given.find_by(id: params[:id])
 
     if @vote&.destroy
-      redirect_back fallback_location: root_path, notice: DESTROY_SUCCESS_MESSAGE
+      redirect_back_with(:notice, DESTROY_SUCCESS_MESSAGE)
     else
-      redirect_back fallback_location: root_path, alert: DESTROY_ERROR_MESSAGE
+      redirect_back_with(:alert, DESTROY_ERROR_MESSAGE)
     end
   end
 
@@ -32,5 +32,9 @@ class VotesController < ApplicationController
 
   def vote_params
     params.require(:vote).permit(:voted_type, :voted_id)
+  end
+
+  def redirect_back_with(level, message)
+    redirect_back fallback_location: root_path, **{ level => message }
   end
 end
