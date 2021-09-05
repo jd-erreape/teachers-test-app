@@ -15,7 +15,7 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @course = Course.includes(:teachers, :votes_received).find(params[:id])
+    @course = Course.includes(:teachers).find(params[:id])
     @vote = Votes::Builder.new(voter: current_teacher, voted: @course).run
   rescue ActiveRecord::RecordNotFound
     redirect_to courses_path, alert: RESOURCE_DOESNT_EXIST_MESSAGE

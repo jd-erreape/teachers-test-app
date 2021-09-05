@@ -7,11 +7,11 @@ class TeachersController < ApplicationController
   before_action :require_not_current_teacher, only: %i[new create]
 
   def index
-    @teachers = Teacher.includes(:courses, :votes_received).all
+    @teachers = Teacher.includes(:votes_received).all
   end
 
   def show
-    @teacher = Teacher.includes(:courses, :votes_received).find(params[:id])
+    @teacher = Teacher.includes(:courses).find(params[:id])
     @vote = Votes::Builder.new(voter: current_teacher, voted: @teacher).run
   rescue ActiveRecord::RecordNotFound
     redirect_to teachers_path, alert: RESOURCE_DOESNT_EXIST_MESSAGE
