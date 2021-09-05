@@ -11,11 +11,12 @@ class CoursesController < ApplicationController
     # The includes here is necessary to avoid n + 1
     # problem whenever we check in the index view if
     # a teacher is imparting or not a course
-    @courses = Course.includes(:teachers).all
+    @courses = Course.includes(:teachers, :votes_received).all
   end
 
   def show
-    @course = Course.includes(:teachers).find(params[:id])
+    @course = Course.includes(:teachers, :votes_received).find(params[:id])
+    @vote = Votes::Builder.new(voter: current_teacher, voted: @course).run
   rescue ActiveRecord::RecordNotFound
     redirect_to courses_path, alert: COURSE_DOESNT_EXIST_MESSAGE
   end
@@ -41,7 +42,7 @@ class CoursesController < ApplicationController
   end
 
   def course_creation_service
-    Course::Creation.new(
+    Courses::Creation.new(
       teacher: current_teacher,
       course_params: course_params
     )

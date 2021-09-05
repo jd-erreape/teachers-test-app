@@ -10,7 +10,7 @@ class TeacherCoursesController < ApplicationController
 
   def create
     with_not_found_rescue(CREATE_ERROR_MESSAGE) do
-      @teacher_course = TeacherCourse.new(teacher: current_teacher, course: course)
+      @teacher_course = current_teacher.teacher_courses.build(course: course)
 
       if @teacher_course.save
         flash.now[:notice] = CREATE_SUCCESS_MESSAGE
@@ -24,7 +24,7 @@ class TeacherCoursesController < ApplicationController
 
   def destroy
     with_not_found_rescue(DESTROY_ERROR_MESSAGE) do
-      @teacher_course = TeacherCourse.where(teacher: current_teacher, course: course).first
+      @teacher_course = current_teacher.teacher_courses.find_by(course: course)
 
       if @teacher_course&.destroy
         flash.now[:notice] = DESTROY_SUCCESS_MESSAGE

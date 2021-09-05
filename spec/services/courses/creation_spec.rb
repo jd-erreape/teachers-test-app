@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Course::Creation do
+RSpec.describe Courses::Creation do
   subject(:created_course) { instance.run }
 
   let(:teacher) { create(:teacher) }
