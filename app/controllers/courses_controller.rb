@@ -25,11 +25,9 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course = Course.new(course_params)
+    @course = course_creation_service.run
 
-    if @course.save
-      TeacherCourse.create(teacher: current_teacher, course: @course)
-
+    if @course.valid?
       redirect_to courses_path, notice: CREATE_SUCCESS_MESSAGE
     else
       render 'new'
@@ -40,5 +38,12 @@ class CoursesController < ApplicationController
 
   def course_params
     params.require(:course).permit(:title)
+  end
+
+  def course_creation_service
+    Course::Creation.new(
+      teacher: current_teacher,
+      course_params: course_params
+    )
   end
 end
